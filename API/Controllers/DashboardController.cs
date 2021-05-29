@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Activities;
 using Domain;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -10,20 +12,22 @@ namespace API.Controllers
 {
     public class DashboardController : BaseApiController
     {
-        private readonly DataContext _context;
-        public DashboardController(DataContext context)
+        private readonly IMediator _mediator;
+
+        public DashboardController(IMediator mediator)
         {
-            _context = context;
+            _mediator = mediator;
+
         }
         [HttpGet]
         public async Task<ActionResult<List<Dashboard>>> GetDashBoard()
         {
-            return await _context.Board.ToListAsync();
+            return await _mediator.Send(new List.Query());
         }
-        [HttpGet("{id}")] 
+        [HttpGet("{id}")]
         public async Task<ActionResult<Dashboard>> GetDashboardOne(Guid id)
         {
-            return await _context.Board.FindAsync(id);
+           return Ok();
         }
 
     }
