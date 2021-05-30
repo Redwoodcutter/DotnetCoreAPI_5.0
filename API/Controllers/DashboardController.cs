@@ -26,6 +26,12 @@ namespace API.Controllers
         {
             return Ok(await Mediator.Send(new Create.Command {Dashboard = dashboard}));
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditActivity(Guid id, Dashboard dashboard)
+        {
+            dashboard.Id = id;
+            return Ok(await Mediator.Send(new Edit.Command{Dashboard = dashboard}));
+        }
 
     }
 }
