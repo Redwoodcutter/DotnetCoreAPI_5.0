@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using Domain;
 using MediatR;
 using Persistence;
@@ -15,20 +16,22 @@ namespace Application.Activities
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
+                _mapper = mapper;
                 _context = context;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-               var activities = await _context.Board.FindAsync(request.Dashboard.Id);
+                var activities = await _context.Board.FindAsync(request.Dashboard.Id);
 
-               activities.Title = request.Dashboard.Title ?? activities.Title;
+                _mapper.Map(request.Dashboard, activities);
 
-               await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-               return Unit.Value;
+                return Unit.Value;
 
             }
         }
