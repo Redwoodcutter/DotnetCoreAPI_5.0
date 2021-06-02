@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './styles.css';
 import axios from 'axios';
 import { Header, List } from 'semantic-ui-react';
-import {Activity} from '../models/activity'
+import {Activity} from '../models/activity';
+import Navbar from './navbar';
 
 
 
@@ -18,7 +19,7 @@ function App() {
 
   return (
     <div>
-      <Header as='h2' icon='users' content='BestDb'/>
+     <Navbar></Navbar>
         <List>
           {dashboard.map(dashboard => (
             <List.Item key={dashboard.id}>
