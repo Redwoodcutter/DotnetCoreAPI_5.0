@@ -30,7 +30,7 @@ function App() {
         </List>
      </Container>
        
-    </div>
+    </>
   );
 }
 
