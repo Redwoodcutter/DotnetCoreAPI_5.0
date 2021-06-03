@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './styles.css';
 import axios from 'axios';
-import { Header, List } from 'semantic-ui-react';
+import { Container, Header, List } from 'semantic-ui-react';
 import {Activity} from '../models/activity';
 import Navbar from './navbar';
 
@@ -18,8 +18,9 @@ function App() {
   }, [])
 
   return (
-    <div>
-     <Navbar></Navbar>
+    <>
+     <Navbar/>
+     <Container style={{marginTop:'7rem'}}>
         <List>
           {dashboard.map(dashboard => (
             <List.Item key={dashboard.id}>
@@ -27,6 +28,8 @@ function App() {
             </List.Item>
           ) )}
         </List>
+     </Container>
+       
     </div>
   );
 }
