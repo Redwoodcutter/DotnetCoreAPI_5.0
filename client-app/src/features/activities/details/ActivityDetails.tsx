@@ -1,12 +1,13 @@
 import React from 'react';
-import { Button, Card, Icon, Image } from 'semantic-ui-react';
+import { Button, Card, Image } from 'semantic-ui-react';
 import { Activity } from '../../../app/models/activity';
 
 interface Props {
     dashboard : Activity
+    cancelSelectActivity: () => void;
 }
 
-export default function ActivityDetails({dashboard}: Props) {
+export default function ActivityDetails({dashboard,cancelSelectActivity}: Props) {
     return (
         <Card>
             <Image src={`/assets/categoryImages/${dashboard.category}.jpg`} />
@@ -21,7 +22,7 @@ export default function ActivityDetails({dashboard}: Props) {
             </Card.Content>
             <Card.Content extra>
                <Button.Group>
-                   <Button basic color='blue' content='Edit' />
+                   <Button onClick={cancelSelectActivity} basic color='blue' content='Edit' />
                    <Button basic color='grey' content='Cancel' />
                </Button.Group>
             </Card.Content>

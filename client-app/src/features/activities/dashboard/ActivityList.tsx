@@ -4,9 +4,11 @@ import { Activity } from '../../../app/models/activity'
 
 interface Props {
     dashboard : Activity[];
+    selectActivity: (id: string) => void;
+
 }
 
-export default function ActivityList({dashboard}:Props){
+export default function ActivityList({dashboard,selectActivity}:Props){
     return(
         <Segment>
             <Item.Group divided>
@@ -20,7 +22,7 @@ export default function ActivityList({dashboard}:Props){
                                 <div>{dashboard.category}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button floated='right' content='view' color='blue'></Button>
+                                <Button onClick={() => selectActivity(dashboard.id)} floated='right' content='view' color='blue'></Button>
                                 <Label basic content = {dashboard.category} />
                             </Item.Extra>
                         </Item.Content>
