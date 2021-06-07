@@ -1,4 +1,3 @@
-import { open } from 'inspector';
 import React from 'react';
 import {Button, Container, Menu} from 'semantic-ui-react';
 
