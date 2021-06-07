@@ -24,7 +24,7 @@ editMode,openForm,closeForm}: Props){
                         selectActivity={selectActivity} />
                     </Grid.Column>
                     <Grid.Column width={6}>
-                            {selectedActivity &&
+                            {selectedActivity && !editMode &&
                             <ActivityDetails 
                             dashboard={selectedActivity} 
                             cancelSelectActivity={cancelSelectActivity} 
