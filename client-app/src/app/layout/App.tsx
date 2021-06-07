@@ -34,6 +34,13 @@ function App() {
   function handleFormClose(){
     setEditMode(false);
   }
+  function handleCreateOrEditActivity(activity: Activity){
+    activity.id 
+    ? setDashboard([...dashboard.filter(x=> x.id !== activity.id), activity])
+    : setDashboard([...dashboard, activity]); 
+    setEditMode(false);
+    setSelectedActivity(activity);
+  }
 
   return (
     <>
@@ -47,6 +54,7 @@ function App() {
           editMode={editMode}
           openForm={handleFormOpen}
           closeForm={handleFormClose}
+          createOrEdit={handleCreateOrEditActivity}
         />
      </Container>
        

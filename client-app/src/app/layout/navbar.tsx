@@ -5,7 +5,7 @@ import {Button, Container, Menu} from 'semantic-ui-react';
 interface Props{
     openForm : () => void;
 }
-export default function NavBar({openForm}:Props){
+export default function Navbar({openForm}:Props){
     return (
         <Menu inverted fixed="top">
             <Container>
