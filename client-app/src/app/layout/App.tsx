@@ -6,6 +6,7 @@ import ActivityDashboard from '../../features/activities/dashboard/ActivityDashb
 import Navbar from './navbar';
 import {v4 as uuid} from 'uuid';
 import agent from '../api/agent';
+import LoadingComponent from './LoadingComponent';
 
 
 
@@ -13,6 +14,7 @@ function App() {
   const [dashboard, setDashboard] = useState<Activity[]> ([]);
   const [SelectedActivity, setSelectedActivity] = useState<Activity | undefined> (undefined);
   const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     agent.Activities.list().then(response => {
@@ -22,6 +24,7 @@ function App() {
         activities.push(activity);
       })
       setDashboard(response);
+      setLoading(false);
     })
   }, [])
 
@@ -49,7 +52,7 @@ function App() {
   function handleDeleteActivity(id: string){
     setDashboard([...dashboard.filter(x=>x.id !==id)])
   }
-
+  if(loading) return <LoadingComponent content='Loading app' />
   return (
     <>
      <Navbar openForm={handleFormOpen} />
