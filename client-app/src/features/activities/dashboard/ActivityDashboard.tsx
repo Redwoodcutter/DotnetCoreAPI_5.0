@@ -26,6 +26,7 @@ editMode,openForm,closeForm,createOrEdit,deleteActivity,submitting}: Props){
                 <ActivityList dashboard={dashboard}
                         selectActivity={selectActivity} 
                         deleteActivity={deleteActivity}
+                        submitting={submitting}
                         />
                     </Grid.Column>
                     <Grid.Column width={6}>
