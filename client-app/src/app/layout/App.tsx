@@ -7,10 +7,14 @@ import Navbar from './navbar';
 import {v4 as uuid} from 'uuid';
 import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
+import { useStore } from '../stores/store';
 
 
 
 function App() {
+
+  const {activityStore} = useStore();
+
   const [dashboard, setDashboard] = useState<Activity[]> ([]);
   const [SelectedActivity, setSelectedActivity] = useState<Activity | undefined> (undefined);
   const [editMode, setEditMode] = useState(false);
@@ -75,6 +79,7 @@ function App() {
     <>
      <Navbar openForm={handleFormOpen} />
      <Container style={{marginTop:'7em'}}>
+       <h2>{activityStore.title}</h2>
         <ActivityDashboard 
           dashboard={dashboard}
           selectedActivity={SelectedActivity}
