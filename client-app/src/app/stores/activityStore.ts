@@ -4,7 +4,7 @@ import { Activity } from "../models/activity";
 
 export default class ActivityStore{
     activities: Activity[] = [];
-    SelectedActivity: Activity | null = null;
+    SelectedActivity: Activity | undefined = undefined;
     editMode = false;
     loading = false;
     loadingInitial = false;
@@ -31,4 +31,18 @@ export default class ActivityStore{
             })
         }
     }
+    selectActivity = (id: string) => {
+        this.SelectedActivity = this.activities.find(a=>a.id === id)
+    }
+    cancelSelectedActivity = () => {
+        this.SelectedActivity = undefined;
+    }
+    openForm = (id?: string) => {
+        id ? this.selectActivity(id) : this.cancelSelectedActivity();
+        this.editMode = true;
+    }
+    closeForm = () => {
+        this.editMode = false;
+    }
+
 }

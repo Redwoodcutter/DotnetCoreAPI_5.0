@@ -1,20 +1,22 @@
 import React, { SyntheticEvent, useState } from 'react'
 import { Button, Item, Label, Segment } from 'semantic-ui-react'
 import { Activity } from '../../../app/models/activity'
+import { useStore } from '../../../app/stores/store';
 
 interface Props {
     dashboard : Activity[];
-    selectActivity: (id: string) => void;
+
     deleteActivity: (id: string) => void;
     submitting: boolean;
 }
 
-export default function ActivityList({dashboard,selectActivity,deleteActivity,submitting}:Props){
+export default function ActivityList({dashboard,deleteActivity,submitting}:Props){
     const [target, setTarget] = useState('');
     function handleActivityDelete(e:SyntheticEvent<HTMLButtonElement>, id: string){
         setTarget(e.currentTarget.name);
         deleteActivity(id);
         }
+    const {activityStore} = useStore();
     return(
         <Segment>
             <Item.Group divided>
@@ -28,7 +30,7 @@ export default function ActivityList({dashboard,selectActivity,deleteActivity,su
                                 <div>{dashboard.category}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button onClick={() => selectActivity(dashboard.id)} floated='right' content='view' color='blue'></Button>
+                                <Button onClick={() => activityStore.selectActivity(dashboard.id)} floated='right' content='view' color='blue'></Button>
                                 <Button 
                                     name={dashboard.id}
                                     loading={submitting && target === dashboard.id} 
