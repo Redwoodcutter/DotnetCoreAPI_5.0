@@ -6,7 +6,7 @@ import { useStore } from '../../../app/stores/store';
 
 export default observer(function ActivityList(){
     const {activityStore} = useStore();
-    const {deleteActivity, activities,loading} = activityStore
+    const {deleteActivity, activitiesByDate,loading} = activityStore
     const [target, setTarget] = useState('');
     function handleActivityDelete(e:SyntheticEvent<HTMLButtonElement>, id: string){
         setTarget(e.currentTarget.name);
@@ -17,7 +17,7 @@ export default observer(function ActivityList(){
     return(
         <Segment>
             <Item.Group divided>
-                {activities.map(dashboard =>(
+                {activitiesByDate.map(dashboard =>(
                     <Item key={dashboard.id}>
                         <Item.Content>
                             <Item.Header as='a'>{dashboard.title}</Item.Header>
