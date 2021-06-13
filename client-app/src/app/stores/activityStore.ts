@@ -19,6 +19,7 @@ export default class ActivityStore{
     }
 
     loadActivities = async () => {
+        this.loadingInitial = true;
         try{
             const activities = await agent.Activities.list();
             runInAction(()=>{
@@ -44,6 +45,7 @@ export default class ActivityStore{
             try {
                 activity = await agent.Activities.details(id);
                 this.setActivity(activity);
+                this.SelectedActivity = activity;
                 this.setLoadingInitial(false);
             } catch (error) {
                 console.log(error);
