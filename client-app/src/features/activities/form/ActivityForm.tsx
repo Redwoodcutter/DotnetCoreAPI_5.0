@@ -1,21 +1,26 @@
 import { observer } from 'mobx-react-lite';
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import { Button, Form, Segment } from 'semantic-ui-react'
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
 
 export default observer(function ActivityForm(){
     const {activityStore} = useStore();
-    const {SelectedActivity, createActivity, updateActivity,loading} = activityStore;
-
-    const initialState = SelectedActivity ?? {
+    const {createActivity, updateActivity,loading,loadActivity,loadingInitial} = activityStore;
+    const {id} = useParams<{id: string}>();
+    const [dashboard, setDashboard] = useState({
         id: '',
         title: '',
         category: '',
         description: '',
         date:'',
-    }
+    });
 
-    const [dashboard, setDashboard] = useState(initialState);
+    useEffect(()=>{
+        if(id) loadActivity(id).then(activity => setDashboard(activity!))
+    },[id,loadActivity]);
+
     function handleSubmit(){
         dashboard.id ? updateActivity(dashboard) : createActivity(dashboard);
     }
@@ -23,6 +28,8 @@ export default observer(function ActivityForm(){
         const {name, value} = event.target;
         setDashboard({...dashboard, [name]: value});
     }
+
+    if(loadingInitial) return <LoadingComponent content='Loading Activities...' />
   
     return(
         <Segment clearing>
