@@ -8,15 +8,15 @@ import { useStore } from '../../../app/stores/store';
 
 
 export default observer(function ActivityDetails() {
-    const {activityStore} = useStore();
-    const {SelectedActivity: dashboard,loadActivity, loadingInitial} = activityStore;
-    const {id} = useParams<{id: string}>();
+    const { activityStore } = useStore();
+    const { SelectedActivity: dashboard, loadActivity, loadingInitial } = activityStore;
+    const { id } = useParams<{ id: string }>();
 
-    useEffect(()=>{
-        if(id) loadActivity(id);
-    },[id, loadActivity]);
+    useEffect(() => {
+        if (id) loadActivity(id);
+    }, [id, loadActivity]);
 
-    if(loadingInitial || !dashboard) return <LoadingComponent/>;
+    if (loadingInitial || !dashboard) return <LoadingComponent />;
 
     return (
         <Card fluid>
@@ -31,10 +31,10 @@ export default observer(function ActivityDetails() {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-               <Button.Group widths='2'>
-                   <Button as={Link} to={`/manage/${dashboard.id}`} basic color='blue' content='Edit' />
-                   <Button as={Link} to='/activities' basic color='grey' content='Cancel' />
-               </Button.Group>
+                <Button.Group widths='2'>
+                    <Button as={Link} to={`/manage/${dashboard.id}`} basic color='blue' content='Edit' />
+                    <Button as={Link} to='/activities' basic color='grey' content='Cancel' />
+                </Button.Group>
             </Card.Content>
         </Card>
     )
