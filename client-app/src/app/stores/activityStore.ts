@@ -23,7 +23,7 @@ export default class ActivityStore {
                 const date = activity.date;
                 dashboard[date] = dashboard[date] ? [...dashboard[date], activity] : [activity];
                 return dashboard;
-            }, {} as { [key: string]: Activity[]})
+            }, {} as { [key: string]: Activity[] })
         )
     }
 
