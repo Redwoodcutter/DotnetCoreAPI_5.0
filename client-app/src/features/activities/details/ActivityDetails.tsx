@@ -4,10 +4,10 @@ import { Link, useParams } from 'react-router-dom';
 import { Button, Card, Grid, Image } from 'semantic-ui-react';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
-import  ActivityDetailedHeader  from './ActivityDetaileddHeader';
-import  ActivityDetailedInfo  from './ActivityDetailedInfo';
-import  AcvityDetailedChat  from './ActivityDetailedChat';
-import  ActivityDetailedSidebar  from './ActivityDetailedSidebar';
+import ActivityDetailedHeader from './ActivityDetaileddHeader';
+import ActivityDetailedInfo from './ActivityDetailedInfo';
+import AcvityDetailedChat from './ActivityDetailedChat';
+import ActivityDetailedSidebar from './ActivityDetailedSidebar';
 
 export default observer(function ActivityDetails() {
     const { activityStore } = useStore();
@@ -21,15 +21,15 @@ export default observer(function ActivityDetails() {
     if (loadingInitial || !dashboard) return <LoadingComponent />;
 
     return (
-      <Grid>
-          <Grid.Column width={10}>
-              <ActivityDetailedHeader />
-              <ActivityDetailedInfo />
-              <AcvityDetailedChat />
-          </Grid.Column>
-          <Grid.Column width={6}>
-              <ActivityDetailedSidebar />
-          </Grid.Column>
-      </Grid>
+        <Grid>
+            <Grid.Column width={10}>
+                <ActivityDetailedHeader />
+                <ActivityDetailedInfo />
+                <AcvityDetailedChat />
+            </Grid.Column>
+            <Grid.Column width={6}>
+                <ActivityDetailedSidebar />
+            </Grid.Column>
+        </Grid>
     )
 })
