@@ -23,7 +23,9 @@ namespace Application.Activities
 
             public async Task<Dashboard> Handle(Query request, CancellationToken cancellationToken)
             {
-               return await _context.Board.FindAsync(request.Id);
+               var activity = await _context.Board.FindAsync(request.Id);
+               if(activity == null) throw new Exception("Activity Not Found");
+               return activity;
             }
         }
     }
