@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Core;
 using Domain;
 using MediatR;
 using Persistence;
@@ -9,11 +10,11 @@ namespace Application.Activities
 {
     public class Details
     {
-        public class Query : IRequest<Dashboard>
+        public class Query : IRequest<Result<Dashboard>>
         {
             public Guid Id { get; set; }
         }
-        public class Handler : IRequestHandler<Query, Dashboard>
+        public class Handler : IRequestHandler<Query, Result<Dashboard>>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
@@ -21,11 +22,11 @@ namespace Application.Activities
                 _context = context;
             }
 
-            public async Task<Dashboard> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<Dashboard>> Handle(Query request, CancellationToken cancellationToken)
             {
                var activity = await _context.Board.FindAsync(request.Id);
-               if(activity == null) throw new Exception("Activity Not Found");
-               return activity;
+               
+               return Result<Dashboard>.Success(activity);
             }
         }
     }

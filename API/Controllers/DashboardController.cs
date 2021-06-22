@@ -17,9 +17,12 @@ namespace API.Controllers
             return await Mediator.Send(new List.Query());
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<Dashboard>> GetDashboardOne(Guid id)
+        public async Task<IActionResult> GetDashboardOne(Guid id)
         {
-           return await Mediator.Send(new Details.Query{Id=id});
+           var result = await Mediator.Send(new Details.Query{Id=id});
+
+           return HandleResult(result);
+          
         }
         [HttpPost]
         public async Task<IActionResult> CreateActivity([FromBody]Dashboard dashboard)
